@@ -18,6 +18,7 @@ const Post: React.FC<PostType> = ({
         timestamp,
     },
 }) => {
+    const token = localStorage.getItem("token");
     const dispatch = useDispatch();
     const handleClick = () => {
         dispatch(likePost({ postId: _id, isLike: true }));
@@ -25,7 +26,7 @@ const Post: React.FC<PostType> = ({
 
     return (
         <>
-            <div className="card mt-4 mb-4">
+            <div className="card mb-4">
                 <div className="card-body">
                     <div className="card-title bg-light">
                         <div className="d-flex">
@@ -64,13 +65,17 @@ const Post: React.FC<PostType> = ({
                         <span>Likes: {likes}</span>
                         <span>Tag: {tag}</span>
                     </div>
-                    <hr />
-                    <button
-                        className="btn btn-primary btn-small"
-                        onClick={handleClick}
-                    >
-                        Like
-                    </button>
+                    {token && (
+                        <>
+                            <hr />
+                            <button
+                                className="btn btn-primary btn-small"
+                                onClick={handleClick}
+                            >
+                                Like
+                            </button>
+                        </>
+                    )}
                 </div>
             </div>
         </>

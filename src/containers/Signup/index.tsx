@@ -10,29 +10,48 @@ import {
 import { authorInitialState } from "../../redux/initial-states";
 import { State } from "../../redux/reducers";
 
+interface FileReaderEventTarget extends EventTarget {
+    result: string;
+}
+
+interface FileReaderEvent extends Event {
+    target: FileReaderEventTarget;
+    getMessage(): string;
+}
+
 const Signup = () => {
     const [username, setUsername] = useState(authorInitialState.data.username);
     const [name, setName] = useState(authorInitialState.data.name);
-    const [author_avatar, setAuthorAvatar] = useState<FileList | File | null>(
+    const [author_avatar, setAuthorAvatar] = useState<File | null>(
         authorInitialState.data.author_avatar
     );
     const [password, setPassword] = useState(authorInitialState.data.password);
-    const [repeat_password, setRepeatPassword] = useState(
+    const [confirm_password, setConfirmPassword] = useState(
         authorInitialState.data.password
     );
     const isLoading = useSelector(
         (state: State) => state.generalReducer.isLoading
     );
 
-    const message = useSelector((state: State) => state.generalReducer.message);
-
     const dispatch = useDispatch();
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setAuthorAvatar(event.target.files![0]);
+        console.log("Author Avatar: ", author_avatar);
+
+        let reader = new FileReader();
+        reader.readAsDataURL(event.target.files![0]);
+
+        // reader.onload((ev: ProgressEvent) => {
+        //     console.log("img data: ", reader.result);
+        // });
+    };
 
     const handleSubmit = async (
         event: React.SyntheticEvent<HTMLFormElement>
     ) => {
         event.preventDefault();
-        if (repeat_password != password) {
+        if (confirm_password != password) {
             dispatch(
                 setMessage({ text: "Repeat password mismatch", level: "error" })
             );
@@ -44,7 +63,7 @@ const Signup = () => {
                 data: {
                     username,
                     name,
-                    author_avatar: "dfa871d6-6087-4513-97ad-5d4188445821.jpeg",
+                    author_avatar,
                     password,
                 },
             })
@@ -54,18 +73,8 @@ const Signup = () => {
     return (
         <>
             <div>
-                <div>
-                    {message && (
-                        <div>
-                            <div style={{ color: "white" }}>{message.text}</div>
-                            <div style={{ color: "white" }}>
-                                {message.level}
-                            </div>
-                        </div>
-                    )}
-                </div>
-                <section className="vh-100 bg-dark">
-                    <div className="container h-100">
+                <section className="mt-5">
+                    <div className="container">
                         <div className="row d-flex justify-content-center align-items-center h-100">
                             <div className="col-lg-6 col-xl-5">
                                 <div
@@ -151,19 +160,9 @@ const Signup = () => {
                                                                 id="avatar"
                                                                 className="form-control"
                                                                 required={true}
-                                                                onChange={(
-                                                                    event
-                                                                ) => {
-                                                                    setAuthorAvatar(
-                                                                        event
-                                                                            .target
-                                                                            .files![0]
-                                                                    );
-                                                                    console.log(
-                                                                        "Author Avatar: ",
-                                                                        author_avatar
-                                                                    );
-                                                                }}
+                                                                onChange={
+                                                                    handleFileChange
+                                                                }
                                                             />
                                                         </div>
                                                     </div>
@@ -199,21 +198,21 @@ const Signup = () => {
                                                         <div className="form-outline flex-fill mb-0">
                                                             <label
                                                                 className="form-label"
-                                                                htmlFor="repeatPassword"
+                                                                htmlFor="confirmPassword"
                                                             >
                                                                 Repeat your
                                                                 password
                                                             </label>
                                                             <input
                                                                 type="password"
-                                                                id="repeatPassword"
+                                                                id="confirmPassword"
                                                                 className="form-control"
                                                                 placeholder="Password"
                                                                 required={true}
                                                                 onChange={(
                                                                     event
                                                                 ) => {
-                                                                    setRepeatPassword(
+                                                                    setConfirmPassword(
                                                                         event
                                                                             .target
                                                                             .value

@@ -22,7 +22,11 @@ const Home = () => {
     return (
         <>
             <h1 className="mt-4 mb-4">Posts</h1>
-            <Posts data={posts.data} />
+            <div className="row">
+                <div className="col-md-3"></div>
+                <Posts data={posts.data} />
+                <div className="col-md-3"></div>
+            </div>
         </>
     );
 };

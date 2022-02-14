@@ -59,6 +59,7 @@ export const signOut = () => {
     return (dispatch: Dispatch<Action>) => {
         AuthService.get("signout")
         .then(async response => {
+            localStorage.removeItem("token")
             await dispatch({
                 type: GeneralActionTypes.SET_MESSAGE,
                 payload: { text: response.data.message, level: "success" },

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../components/Icons/Logo";
 import { signIn } from "../../redux/action-creators/AuthActionCreators";
 import { setIsLoading } from "../../redux/action-creators/GeneralActionCreators";
@@ -16,6 +16,7 @@ const Signin = () => {
     );
 
     const message = useSelector((state: State) => state.generalReducer.message);
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
@@ -32,12 +33,13 @@ const Signin = () => {
                 },
             })
         );
+        navigate("/dashboard");
     };
 
     return (
         <>
-            <section className="vh-100 bg-dark">
-                <div className="container h-100">
+            <section className="">
+                <div className="container">
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-lg-6 col-xl-5">
                             <div
@@ -125,6 +127,16 @@ const Signin = () => {
                                                         className="btn btn-primary btn-lg"
                                                         value="Sign in"
                                                     />
+                                                    {isLoading ? (
+                                                        <div
+                                                            className="spinner-border text-warning"
+                                                            role="status"
+                                                        >
+                                                            <span className="visually-hidden">
+                                                                Loading...
+                                                            </span>
+                                                        </div>
+                                                    ) : null}
                                                 </div>
                                             </form>
                                         </div>

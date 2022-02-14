@@ -1,7 +1,28 @@
-import React from "react";
+import { useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { signOut } from "../../redux/action-creators/AuthActionCreators";
 import Logo from "../Icons/Logo";
 
 export default () => {
+    const token = localStorage.getItem("token");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const navigationMenu = [
+        { text: "Posts", url: "", display: "block" },
+        { text: "Authors", url: "authors", display: "block" },
+    ];
+
+    const registrationMenu = [
+        { text: "Sign in", url: "signin", display: token ? "none" : "block" },
+        { text: "Sign up", url: "signup", display: token ? "none" : "block" },
+    ];
+
+    const handleClick = async () => {
+        console.log("");
+        await dispatch(signOut());
+        navigate("/");
+    };
+
     return (
         <>
             <nav className="navbar navbar-expand-lg p-3 navbar-light bg-light">
@@ -25,31 +46,93 @@ export default () => {
                         id="navbarSupportedContent"
                     >
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <a
-                                    className="nav-link active"
-                                    href="authors.html"
-                                >
-                                    Authors
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="posts.html">
-                                    Posts
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="resiter.html">
-                                    Register
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="login.html">
-                                    Login
-                                </a>
-                            </li>
+                            {navigationMenu.map((item, index) => {
+                                return (
+                                    <li key={index} className="nav-item">
+                                        <NavLink
+                                            className={({ isActive }) => {
+                                                const linkClasses = `nav-link`;
+                                                const activeClasses = `${linkClasses} active`;
+                                                const inActiveClasses = `${linkClasses}`;
+                                                return isActive
+                                                    ? activeClasses
+                                                    : inActiveClasses;
+                                            }}
+                                            to={`/${item.url}`}
+                                        >
+                                            {item.text}
+                                        </NavLink>
+                                    </li>
+                                );
+                            })}
                         </ul>
                     </div>
+                    <div className="navbar-text">
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                            {registrationMenu.map((item, index) => {
+                                return (
+                                    <li key={index} className="nav-item">
+                                        <NavLink
+                                            className={({ isActive }) => {
+                                                const linkClasses = `nav-link`;
+                                                const activeClasses = `${linkClasses} active`;
+                                                const inActiveClasses = `${linkClasses}`;
+                                                return isActive
+                                                    ? activeClasses
+                                                    : inActiveClasses;
+                                            }}
+                                            to={`/${item.url}`}
+                                        >
+                                            {item.text}
+                                        </NavLink>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
+                    {token && (
+                        <div className="navbar-text dropdown">
+                            <a
+                                href="#"
+                                className="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
+                                id="dropdownUser2"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                <img
+                                    src="images/img.png"
+                                    alt=""
+                                    width="32"
+                                    height="32"
+                                    className="rounded-circle me-2"
+                                />
+                                <strong>Username</strong>
+                            </a>
+                            <ul
+                                className="dropdown-menu text-small shadow"
+                                aria-labelledby="dropdownUser2"
+                            >
+                                <li>
+                                    <a
+                                        className="dropdown-item"
+                                        href="change-password.html"
+                                    >
+                                        Change Password
+                                    </a>
+                                </li>
+                                <li></li>
+                            </ul>
+                            <div
+                                role="button"
+                                onClick={handleClick}
+                                className={`dropdown-item d-${
+                                    token ? "block" : "none"
+                                }`}
+                            >
+                                Sign out
+                            </div>
+                        </div>
+                    )}
                 </div>
             </nav>
         </>

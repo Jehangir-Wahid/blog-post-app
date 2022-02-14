@@ -23,7 +23,27 @@ const AuthorPosts = () => {
 
     return (
         <>
-            <Posts data={posts.data} />
+            <h1 className="mt-4 mb-4">Author Posts</h1>
+
+            <div className="row">
+                <div className="col-md-3">
+                    <div className="card">
+                        <div className="card-body">
+                            <img
+                                src="images/img.png"
+                                className="img-thumbnail"
+                                alt=""
+                            />
+                        </div>
+                        <div className="border p-2">Username</div>
+                        <div className="border p-2">Total Posts: 5</div>
+                    </div>
+                </div>
+
+                <Posts data={posts.data} />
+
+                <div className="col-md-3"></div>
+            </div>
         </>
     );
 };

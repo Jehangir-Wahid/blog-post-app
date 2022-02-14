@@ -17,7 +17,7 @@ const Author: React.FC<AuthorType> = ({
             <div className="row border p-4 mb-4">
                 <div className="col-md-3">
                     <img
-                        src={author_avatar}
+                        src={`${author_avatar}`}
                         className="img-thumbnail rounded-circle"
                         alt={name}
                     />

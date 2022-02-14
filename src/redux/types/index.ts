@@ -5,7 +5,7 @@ export interface AuthorType {
         password?: string,
         profileId?: string,
         name?: string,
-        author_avatar?: string,
+        author_avatar?: string | File | FileList | null,
         total_posts?: number,
         popular_post_id?: string,
         popular_post_name?: string,
