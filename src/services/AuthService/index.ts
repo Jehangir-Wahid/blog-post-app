@@ -1,10 +1,13 @@
 import axios from "axios";
 
-const Author = axios.create({
-    baseURL: "http://localhost:3001/author/"
+const AuthService = axios.create({
+    baseURL: "http://localhost:3001/auth/",
+    headers : {
+        "Content-Type":"application/json",
+    }
 });
 
-Author.interceptors.request.use(
+AuthService.interceptors.request.use(
     async (config: any) => {
         const token = await localStorage.getItem('token')
         if (token) {
@@ -17,4 +20,4 @@ Author.interceptors.request.use(
     }
 )
 
-export default Author
+export default AuthService

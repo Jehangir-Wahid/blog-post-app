@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const Auth = axios.create({
-    baseURL: "http://localhost:3001/auth/"
+const PostService = axios.create({
+    baseURL: "http://localhost:3001/post/"
 });
 
-Auth.interceptors.request.use(
+PostService.interceptors.request.use(
     async (config: any) => {
         const token = await localStorage.getItem('token')
         if (token) {
@@ -17,4 +17,4 @@ Auth.interceptors.request.use(
     }
 )
 
-export default Auth
+export default PostService

@@ -4,7 +4,7 @@ const Spinner = () => {
     return (
         <div className="row vh-100 align-items-center">
             <div className="col text-center">
-                <div className="spinner-border text-light" role="status">
+                <div className="spinner-border text-dark" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </div>
             </div>

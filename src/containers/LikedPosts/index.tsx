@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import Posts from "../../components/Posts";
 import { setIsLoading } from "../../redux/action-creators/GeneralActionCreators";
-import { getAllPosts } from "../../redux/action-creators/PostActionCreators";
+import { likedPosts } from "../../redux/action-creators/PostActionCreators";
 import { State } from "../../redux/reducers";
 import { PostsType } from "../../redux/types";
 
-const Home = () => {
+const LikedPosts = () => {
+    const { authorId } = useParams();
     const posts: PostsType = useSelector((state: State) => state.postsReducer);
     const dispatch = useDispatch();
 
@@ -15,16 +17,15 @@ const Home = () => {
         (async () => {
             if (posts.data.length <= 1) dispatch(setIsLoading(true));
 
-            await dispatch(getAllPosts());
+            await dispatch(likedPosts(authorId));
         })();
     }, []);
 
     return (
         <>
-            <h1 className="mt-4 mb-4">Posts</h1>
             <Posts data={posts.data} />
         </>
     );
 };
 
-export default Home;
+export default LikedPosts;

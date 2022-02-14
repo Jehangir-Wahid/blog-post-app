@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const Fan = axios.create({
-    baseURL: "http://localhost:3001/fan/"
+const AuthorService = axios.create({
+    baseURL: "http://localhost:3001/author/"
 });
 
-Fan.interceptors.request.use(
+AuthorService.interceptors.request.use(
     async (config: any) => {
         const token = await localStorage.getItem('token')
         if (token) {
@@ -17,4 +17,4 @@ Fan.interceptors.request.use(
     }
 )
 
-export default Fan
+export default AuthorService
