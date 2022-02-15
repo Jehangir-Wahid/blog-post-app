@@ -55,120 +55,115 @@ const PostForm = () => {
 
     return (
         <>
-            <div className="col-lg-6 col-xl-5">
-                <div
-                    className="card border-0"
-                >
-                    <div className="card-body p-md-2">
-                        <div className="row justify-content-center">
-                            <div className="col-md-12 col-lg-12 col-xl-12 order-2 order-lg-1">
-                                <form
-                                    className="mx-1 mx-md-1"
-                                    onSubmit={handleSubmit}
-                                >
-                                    <div className="d-flex flex-row align-items-center mb-4">
-                                        <i className="fas fa-user fa-lg me-3 fa-fw"></i>
-                                        <div className="form-outline flex-fill mb-0">
-                                            <label
-                                                className="form-label"
-                                                htmlFor="postTitle"
-                                            >
-                                                Post Title
-                                            </label>
-                                            <input
-                                                type="text"
-                                                id="postTitle"
-                                                className="form-control"
-                                                placeholder="provide post title"
-                                                required={true}
-                                                onChange={(event) => {
-                                                    setTitle(
-                                                        event.target.value
-                                                    );
-                                                }}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="d-flex flex-row align-items-center mb-4">
-                                        <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                        <div className="form-outline flex-fill mb-0">
-                                            <label
-                                                className="form-label"
-                                                htmlFor="postContent"
-                                            >
-                                                Content
-                                            </label>
-                                            <textarea
-                                                id="postContent"
-                                                className="form-control"
-                                                placeholder="provide post contents"
-                                                required={true}
-                                                onChange={(event) => {
-                                                    setContent(
-                                                        event.target.value
-                                                    );
-                                                }}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="d-flex flex-row align-items-center mb-4">
-                                        <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
-                                        <div className="form-outline flex-fill mb-0">
-                                            <label
-                                                className="form-label"
-                                                htmlFor="avatar"
-                                            >
-                                                Image
-                                            </label>
-                                            <input
-                                                type="file"
-                                                id="avatar"
-                                                className="form-control"
-                                                required={true}
-                                                onChange={handleFileChange}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="d-flex flex-row align-items-center mb-4">
-                                        <i className="fas fa-user fa-lg me-3 fa-fw"></i>
-                                        <div className="form-outline flex-fill mb-0">
-                                            <label
-                                                className="form-label"
-                                                htmlFor="postTag"
-                                            >
-                                                Tag
-                                            </label>
-                                            <input
-                                                type="text"
-                                                id="postTag"
-                                                className="form-control"
-                                                placeholder="provide tag"
-                                                required={true}
-                                                onChange={(event) => {
-                                                    setTag(event.target.value);
-                                                }}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="d-flex mx-4 mb-3 mb-lg-4">
+            <div
+                className="card border-0 text-black"
+                style={{ borderRadius: "25px" }}
+            >
+                <div className="card-body p-md-2">
+                    <div className="row justify-content-center">
+                        <div className="col-md-12 col-lg-12 col-xl-12 order-2 order-lg-1">
+                            <form
+                                className="mx-1 mx-md-1"
+                                onSubmit={handleSubmit}
+                            >
+                                <div className="d-flex flex-row align-items-center mb-4">
+                                    <i className="fas fa-user fa-lg me-3 fa-fw"></i>
+                                    <div className="form-outline flex-fill mb-0">
+                                        <label
+                                            className="form-label"
+                                            htmlFor="postTitle"
+                                        >
+                                            Post Title
+                                        </label>
                                         <input
-                                            type="submit"
-                                            className="btn btn-primary"
-                                            value="Create"
+                                            type="text"
+                                            id="postTitle"
+                                            className="form-control"
+                                            placeholder="provide post title"
+                                            required={true}
+                                            onChange={(event) => {
+                                                setTitle(event.target.value);
+                                            }}
                                         />
-                                        {isLoading ? (
-                                            <div
-                                                className="spinner-border text-warning"
-                                                role="status"
-                                            >
-                                                <span className="visually-hidden">
-                                                    Loading...
-                                                </span>
-                                            </div>
-                                        ) : null}
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                                <div className="d-flex flex-row align-items-center mb-4">
+                                    <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                    <div className="form-outline flex-fill mb-0">
+                                        <label
+                                            className="form-label"
+                                            htmlFor="postContent"
+                                        >
+                                            Content
+                                        </label>
+                                        <textarea
+                                            id="postContent"
+                                            className="form-control"
+                                            placeholder="provide post contents"
+                                            required={true}
+                                            onChange={(event) => {
+                                                setContent(event.target.value);
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="d-flex flex-row align-items-center mb-4">
+                                    <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                    <div className="form-outline flex-fill mb-0">
+                                        <label
+                                            className="form-label"
+                                            htmlFor="avatar"
+                                        >
+                                            Image
+                                        </label>
+                                        <input
+                                            type="file"
+                                            id="avatar"
+                                            className="form-control"
+                                            required={true}
+                                            onChange={handleFileChange}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="d-flex flex-row align-items-center mb-4">
+                                    <i className="fas fa-user fa-lg me-3 fa-fw"></i>
+                                    <div className="form-outline flex-fill mb-0">
+                                        <label
+                                            className="form-label"
+                                            htmlFor="postTag"
+                                        >
+                                            Tag
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="postTag"
+                                            className="form-control"
+                                            placeholder="provide tag"
+                                            required={true}
+                                            onChange={(event) => {
+                                                setTag(event.target.value);
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="d-flex mx-4 mb-3 mb-lg-4">
+                                    <input
+                                        type="submit"
+                                        className="btn btn-primary"
+                                        value="Create"
+                                    />
+                                    {isLoading ? (
+                                        <div
+                                            className="spinner-border text-warning"
+                                            role="status"
+                                        >
+                                            <span className="visually-hidden">
+                                                Loading...
+                                            </span>
+                                        </div>
+                                    ) : null}
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
