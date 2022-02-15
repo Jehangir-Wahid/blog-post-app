@@ -57,16 +57,12 @@ const PostForm = () => {
         <>
             <div className="col-lg-6 col-xl-5">
                 <div
-                    className="card text-black"
+                    className="card border-0 text-black"
                     style={{ borderRadius: "25px" }}
                 >
                     <div className="card-body p-md-2">
                         <div className="row justify-content-center">
                             <div className="col-md-12 col-lg-12 col-xl-12 order-2 order-lg-1">
-                                <Logo />
-                                <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
-                                    Create Post
-                                </p>
                                 <form
                                     className="mx-1 mx-md-1"
                                     onSubmit={handleSubmit}
@@ -155,10 +151,10 @@ const PostForm = () => {
                                             />
                                         </div>
                                     </div>
-                                    <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                    <div className="d-flex mx-4 mb-3 mb-lg-4">
                                         <input
                                             type="submit"
-                                            className="btn btn-primary btn-lg"
+                                            className="btn btn-primary"
                                             value="Create"
                                         />
                                         {isLoading ? (

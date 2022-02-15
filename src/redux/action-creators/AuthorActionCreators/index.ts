@@ -5,7 +5,11 @@ import { AuthorType } from "../../types";
 import AuthorService from "../../../services/AuthorService"
 
 export const getAuthor = (authorId: any) => {
-    return (dispatch: Dispatch<Action>) => {
+    return async (dispatch: Dispatch<Action>) => {
+        await dispatch({
+            type: GeneralActionTypes.SET_IS_LOADING,
+            payload: true,
+        });
         AuthorService.get(`${authorId}`)
         .then(async response => {
             const author: AuthorType = response.data
@@ -27,7 +31,11 @@ export const getAuthor = (authorId: any) => {
 };
 
 export const getAllAuthors = () => {
-    return (dispatch: Dispatch<Action>) => {
+    return async (dispatch: Dispatch<Action>) => {
+        await dispatch({
+            type: GeneralActionTypes.SET_IS_LOADING,
+            payload: true,
+        });
         AuthorService.get("all")
         .then(async response => {
             const authors: AuthorType[] = response.data

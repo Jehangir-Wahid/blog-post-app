@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Author from "../../components/AuthorComponents/Author";
+import NoRecods from "../../components/LayoutComponents/NoRecords";
 import { getAllAuthors } from "../../redux/action-creators/AuthorActionCreators";
 import { setIsLoading } from "../../redux/action-creators/GeneralActionCreators";
 import { State } from "../../redux/reducers";
@@ -26,9 +27,13 @@ const Authors = () => {
             <div className="row">
                 <div className="col-md-3"></div>
                 <div className="col-md-6">
-                    {authors.data.map((author, index) => (
-                        <Author key={index} data={author} />
-                    ))}
+                    {authors.data.length > 1 ? (
+                        authors.data.map((author, index) => (
+                            <Author key={index} data={author} />
+                        ))
+                    ) : (
+                        <NoRecods />
+                    )}
                 </div>
                 <div className="col-md-3"></div>
             </div>

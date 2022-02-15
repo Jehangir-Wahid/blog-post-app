@@ -29,7 +29,11 @@ export const createPost = (post: FormData) => {
 };
 
 export const getPost = (postId: any) => {
-    return (dispatch: Dispatch<Action>) => {
+    return async (dispatch: Dispatch<Action>) => {
+        await dispatch({
+            type: GeneralActionTypes.SET_IS_LOADING,
+            payload: true,
+        });
         PostService.get(`${postId}`)
         .then(async response => {
             const post: PostType = response.data
@@ -54,7 +58,11 @@ export const getPost = (postId: any) => {
 }
 
 export const getAllPosts = () => {
-    return (dispatch: Dispatch<Action>) => {
+    return async (dispatch: Dispatch<Action>) => {
+        await dispatch({
+            type: GeneralActionTypes.SET_IS_LOADING,
+            payload: true,
+        });
         PostService.get("all")
         .then(async response => {
             const posts: PostType[] = response.data
@@ -127,7 +135,11 @@ export const deletePost = (postId: string) => {
 }
 
 export const getSelfPosts = () => {
-    return (dispatch: Dispatch<Action>) => {
+    return async (dispatch: Dispatch<Action>) => {
+        await dispatch({
+            type: GeneralActionTypes.SET_IS_LOADING,
+            payload: true,
+        });
         PostService.get("self-posts")
         .then(async response => {
             const posts: PostType[] = response.data
@@ -152,7 +164,11 @@ export const getSelfPosts = () => {
 }
 
 export const getAuthorPosts = (authorId: any) => {
-    return (dispatch: Dispatch<Action>) => {
+    return async (dispatch: Dispatch<Action>) => {
+        await dispatch({
+            type: GeneralActionTypes.SET_IS_LOADING,
+            payload: true,
+        });
         PostService.get(`user-posts/${authorId}`)
         .then(async response => {
             const posts: PostType[] = response.data
@@ -177,7 +193,11 @@ export const getAuthorPosts = (authorId: any) => {
 }
 
 export const likedPosts = (authorId: any) => {
-    return (dispatch: Dispatch<Action>) => {
+    return async (dispatch: Dispatch<Action>) => {
+        await dispatch({
+            type: GeneralActionTypes.SET_IS_LOADING,
+            payload: true,
+        });
         PostService.get(`liked-posts/${authorId}`)
         .then(async response => {
             const posts: PostType[] = response.data

@@ -107,7 +107,7 @@ export default () => {
                                     height="32"
                                     className="rounded-circle me-2"
                                 />
-                                <strong>{authorName}</strong>
+                                <strong>Dashboard</strong>
                             </NavLink>
                         </div>
                     )}
