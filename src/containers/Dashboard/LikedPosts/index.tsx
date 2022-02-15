@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import DashboardNav from "../../../components/DashboardNav";
@@ -23,11 +23,12 @@ const LikedPosts = () => {
 
     return (
         <>
-            <h1 className="mt-4 mb-4">Liked Posts</h1>
-
             <div className="row">
                 <DashboardNav />
-                <Posts data={posts.data} />
+                <div className="col-md-6">
+                    <h4 className="bg-light p-3">Liked Posts</h4>
+                    <Posts data={posts.data} />
+                </div>
                 <div className="col-md-3"></div>
             </div>
         </>

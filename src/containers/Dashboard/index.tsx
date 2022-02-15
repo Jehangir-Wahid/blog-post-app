@@ -26,7 +26,6 @@ const Dashboard = () => {
 
     return (
         <>
-            <h1 className="mt-4 mb-4">Dashboard</h1>
 
             <div className="row">
                 <DashboardNav />

@@ -6,7 +6,6 @@ import { signOut } from "../../redux/action-creators/AuthActionCreators";
 const DashboardNav = () => {
     const authorId = localStorage.getItem("authorId");
     const leftNavigationMenu = [
-        { text: "Dashboard", url: "dashboard", class: "" },
         {
             text: "Created Posts",
             url: `dashboard/created-posts/${authorId}`,
@@ -32,7 +31,7 @@ const DashboardNav = () => {
     };
 
     return (
-        <div className="col-md-3">
+        <div className="col-md-3  mr-4">
             <div
                 className="d-flex flex-column flex-shrink-0 p-3 bg-light"
                 style={{ width: "280px" }}

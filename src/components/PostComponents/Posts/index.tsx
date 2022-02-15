@@ -7,7 +7,8 @@ import Post from "../Post";
 const Posts: React.FC<PostsType> = ({ data }) => {
     return (
         <>
-            <div className="col-md-6">
+
+
                 {data.length > 1 ? (
                     <>
                         {data.map((post, index) => (
@@ -17,7 +18,6 @@ const Posts: React.FC<PostsType> = ({ data }) => {
                 ) : (
                     <NoRecods />
                 )}
-            </div>
         </>
     );
 };

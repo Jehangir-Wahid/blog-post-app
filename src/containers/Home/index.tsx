@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Posts from "../../components/PostComponents/Posts";
 import { setIsLoading } from "../../redux/action-creators/GeneralActionCreators";
@@ -20,10 +20,12 @@ const Home = () => {
 
     return (
         <>
-            <h1 className="mt-4 mb-4">Posts</h1>
             <div className="row">
                 <div className="col-md-3"></div>
-                <Posts data={posts.data} />
+                <div className="col-md-6">
+                    <h4 className="bg-light p-3">Posts</h4>
+                    <Posts data={posts.data} />
+                </div>
                 <div className="col-md-3"></div>
             </div>
         </>

@@ -5,12 +5,13 @@ import PostForm from "../../../components/PostComponents/PostForm";
 const CreatePost = () => {
     return (
         <>
-            <h1 className="mt-4 mb-4">Create New Post</h1>
-
             <div className="row">
                 {/* <!-- left menu area --> */}
                 <DashboardNav />
-                <PostForm />
+                <div className="col-md-6">
+                    <h4 className="bg-light p-3">Create New Post</h4>
+                    <PostForm />
+                </div>
                 <div className="col-md-3"></div>
             </div>
         </>

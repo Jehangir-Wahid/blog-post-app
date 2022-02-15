@@ -57,8 +57,7 @@ const PostForm = () => {
         <>
             <div className="col-lg-6 col-xl-5">
                 <div
-                    className="card border-0 text-black"
-                    style={{ borderRadius: "25px" }}
+                    className="card border-0"
                 >
                     <div className="card-body p-md-2">
                         <div className="row justify-content-center">
@@ -80,7 +79,7 @@ const PostForm = () => {
                                                 type="text"
                                                 id="postTitle"
                                                 className="form-control"
-                                                placeholder="Some Post"
+                                                placeholder="provide post title"
                                                 required={true}
                                                 onChange={(event) => {
                                                     setTitle(
@@ -102,7 +101,7 @@ const PostForm = () => {
                                             <textarea
                                                 id="postContent"
                                                 className="form-control"
-                                                placeholder="Some post content"
+                                                placeholder="provide post contents"
                                                 required={true}
                                                 onChange={(event) => {
                                                     setContent(
@@ -143,7 +142,7 @@ const PostForm = () => {
                                                 type="text"
                                                 id="postTag"
                                                 className="form-control"
-                                                placeholder="React JS"
+                                                placeholder="provide tag"
                                                 required={true}
                                                 onChange={(event) => {
                                                     setTag(event.target.value);

@@ -23,10 +23,11 @@ const Authors = () => {
 
     return (
         <>
-            <h1 className="mt-4 mb-4">Authors</h1>
             <div className="row">
                 <div className="col-md-3"></div>
                 <div className="col-md-6">
+                    <h4 className="bg-light p-3">Author</h4>
+
                     {authors.data.length > 1 ? (
                         authors.data.map((author, index) => (
                             <Author key={index} data={author} />

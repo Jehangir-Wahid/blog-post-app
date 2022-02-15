@@ -58,12 +58,12 @@ const UpdatePassword = () => {
 
     return (
         <>
-            <h1 className="mt-4 mb-4">Change Password</h1>
-
             <div className="row">
                 {/* <!-- left menu area --> */}
                 <DashboardNav />
                 <div className="col-lg-6 col-xl-5">
+                    <h4 className="bg-light p-3">Change Password</h4>
+
                     <div
                         className="card border-0 text-black"
                         style={{ borderRadius: "25px" }}

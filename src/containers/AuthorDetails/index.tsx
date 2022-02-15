@@ -34,7 +34,7 @@ const AuthorDetails = () => {
                     <div className="row">
                         <div className="col-md-3">
                             <div className="card">
-                                <div className="card-body">
+                                <div className="card-body align-self-center">
                                     <img
                                         src={`${author.author_avatar}`}
                                         className="img-thumbnail"

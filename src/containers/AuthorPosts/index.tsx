@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import Posts from "../../components/PostComponents/Posts";
@@ -23,7 +23,10 @@ const AuthorPosts = () => {
 
     return (
         <>
-            <Posts data={posts.data} />
+            <div className="col-md-6">
+                <h4 className="bg-light p-3">Author Posts</h4>
+                <Posts data={posts.data} />
+            </div>
         </>
     );
 };

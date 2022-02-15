@@ -26,7 +26,7 @@ export default () => {
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg p-3 navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg p-3 navbar-light bg-light mb-5">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#">
                         <Logo />
