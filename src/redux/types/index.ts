@@ -3,12 +3,14 @@ export interface AuthorType {
         _id?: string,
         username: string,
         password?: string,
-        profileId?: string,
+        authorId?: string,
         name?: string,
         author_avatar?: string | File | FileList | null,
         total_posts?: number,
+        total_likes?: number,
         popular_post_id?: string,
         popular_post_name?: string,
+        popular_post_likes?: number,
         timestamp?: string,
     }
 }
@@ -17,12 +19,14 @@ interface Author {
     _id?: string,
     username: string,
     password?: string,
-    profileId?: string,
+    authorId?: string,
     name?: string,
     author_avatar?: string,
     total_posts?: number,
+    total_likes?: number,
     popular_post_id?: string,
     popular_post_name?: string,
+    popular_post_likes?: number,
     timestamp?: string,
 }
 

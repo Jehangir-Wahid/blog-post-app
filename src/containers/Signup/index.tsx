@@ -200,8 +200,7 @@ const Signup = () => {
                                                                 className="form-label"
                                                                 htmlFor="confirmPassword"
                                                             >
-                                                                Repeat your
-                                                                password
+                                                                Confirm password
                                                             </label>
                                                             <input
                                                                 type="password"

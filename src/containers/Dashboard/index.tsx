@@ -1,66 +1,68 @@
-import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import PostForm from "../../components/PostForm";
-import DashboardRoutes from "./DashboardRoutes";
-
+import DashboardNav from "../../components/DashboardNav";
+import { getAuthor } from "../../redux/action-creators/AuthorActionCreators";
+import { setIsLoading } from "../../redux/action-creators/GeneralActionCreators";
+import { State } from "../../redux/reducers";
+import { AuthorType } from "../../redux/types";
 const Dashboard = () => {
-    const authorId = "";
-    const leftNavigationMenu = [
-        { text: "Dashboard", url: "dashboard", class: "active" },
-        {
-            text: "Created Posts",
-            url: `dashboard/created-created-posts/${authorId}`,
-            class: "",
-        },
-        {
-            text: "Liked Posts",
-            url: `dashboard/liked-posts/${authorId}`,
-            class: "",
-        },
-        { text: "Create New Post", url: "dashboard/create-post", class: "" },
-    ];
+    const authorId = localStorage.getItem("authorId");
+    const author: AuthorType["data"] = useSelector(
+        (state: State) => state.authorReducer.data
+    );
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        (async () => {
+            await dispatch(setIsLoading(true));
+            await dispatch(getAuthor(authorId));
+        })();
+    }, []);
+
     return (
         <>
             <h1 className="mt-4 mb-4">Dashboard</h1>
 
             <div className="row">
-                {/* <!-- left menu area --> */}
-                <div className="col-md-3">
-                    <div
-                        className="d-flex flex-column flex-shrink-0 p-3 bg-light"
-                        style={{ width: "280px" }}
-                    >
-                        <ul
-                            className="nav nav-pills flex-column mb-auto"
-                            id="leftNav"
-                        >
-                            {leftNavigationMenu.map((item, index) => {
-                                return (
-                                    <li key={index} className="nav-item">
-                                        <NavLink
-                                            className={({ isActive }) => {
-                                                const linkClasses = `nav-link link-dark`;
-                                                const activeClasses = `${linkClasses} active`;
-                                                const inActiveClasses = `${linkClasses}`;
-                                                return isActive
-                                                    ? activeClasses
-                                                    : inActiveClasses;
-                                            }}
-                                            to={`/${item.url}`}
-                                        >
-                                            {item.text}
-                                        </NavLink>
-                                    </li>
-                                );
-                            })}
-                        </ul>
+                <DashboardNav />
+                <div className="col-md-6">
+                    <h5>Welcome {author.name}</h5>
+                    <div className="row mb-4">
+                        <div className="col-md-4 m-4 border text-center p-5">
+                            <h1>{author.total_posts}</h1>
+                            <h5>Total Posts</h5>
+                        </div>
+                        <div className="col-md-4 m-4 border text-center p-5">
+                            <h1>{author.total_likes}</h1>
+                            <h5>Total Liked</h5>
+                        </div>
                     </div>
+
+                    <h4 className="bg-light p-2">Popular Post</h4>
+
+                    <table className="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Likes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <NavLink
+                                        className="text-decoration-none"
+                                        to={`/post-details/${author.popular_post_id}`}
+                                    >
+                                        {author.popular_post_name}
+                                    </NavLink>
+                                </td>
+                                <td>{author.popular_post_likes}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                {/* <!-- main content area, post --> */}
-
-                <DashboardRoutes />
-
-                {/* <!-- right content area --> */}
                 <div className="col-md-3"></div>
             </div>
         </>

@@ -1,14 +1,15 @@
 import AppRoutes from "./Routes";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Spinner from "../components/Spinner";
+import Header from "../components/LayoutComponents/Header";
+import Footer from "../components/LayoutComponents/Footer";
+import Spinner from "../components/LayoutComponents/Spinner";
 import { useSelector } from "react-redux";
 import { State } from "../redux/reducers";
-import Message from "../components/Message";
+import Message from "../components/LayoutComponents/Message";
+import { IsLoadingType } from "../redux/types";
 
 function App() {
     const message = useSelector((state: State) => state.generalReducer.message);
-    const isLoading = useSelector(
+    const isLoading: IsLoadingType = useSelector(
         (state: State) => state.generalReducer.isLoading
     );
 
@@ -22,17 +23,6 @@ function App() {
                     )}
                 </div>
                 <main className="" role="main">
-                    {/* <div className="container">
-                    <div className="row">
-                        <div className="col">
-                            <div className="border-dark-secondary">
-                                <div className="p-0">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
-
                     <div className="page-wrapper">
                         <div className="page-inner">
                             <div className="page-content-wrapper">

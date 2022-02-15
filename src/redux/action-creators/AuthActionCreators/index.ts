@@ -10,6 +10,7 @@ export const signUp = (author: AuthorType) => {
         .then(async response => {
             console.log(response.data)
             localStorage.setItem("token", response.data.token)
+            localStorage.setItem("author", response.data.author)
             await dispatch({
                 type: GeneralActionTypes.SET_MESSAGE,
                 payload: { text: response.data.message, level: "success" },
@@ -31,10 +32,14 @@ export const signUp = (author: AuthorType) => {
 };
 
 export const signIn = (author: AuthorType) => {
-    return (dispatch: Dispatch<Action>) => {
-        AuthService.post("signin", { username: author.data.username, password: author.data.password})
+    return async (dispatch: Dispatch<Action>) => {
+        await dispatch({ type: GeneralActionTypes.SET_IS_LOADING, payload: true })
+        AuthService.post("signin", { username: author.data.username, password: author.data.password })
         .then(async response => {
             localStorage.setItem("token", response.data.token)
+            localStorage.setItem("authorId", response.data.authorId)
+            localStorage.setItem("author_avatar", response.data.author_avatar)
+            localStorage.setItem("name", response.data.name)
             await dispatch({
                 type: GeneralActionTypes.SET_MESSAGE,
                 payload: { text: response.data.message, level: "success" },
@@ -59,7 +64,7 @@ export const signOut = () => {
     return (dispatch: Dispatch<Action>) => {
         AuthService.get("signout")
         .then(async response => {
-            localStorage.removeItem("token")
+            localStorage.clear()
             await dispatch({
                 type: GeneralActionTypes.SET_MESSAGE,
                 payload: { text: response.data.message, level: "success" },

@@ -1,6 +1,6 @@
 import { title } from "process";
 import React from "react";
-import { PostsType } from "../../redux/types";
+import { PostsType } from "../../../redux/types";
 import Post from "../Post";
 
 const Posts: React.FC<PostsType> = ({ data }) => {

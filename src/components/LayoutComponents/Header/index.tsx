@@ -1,10 +1,12 @@
 import { useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { signOut } from "../../redux/action-creators/AuthActionCreators";
-import Logo from "../Icons/Logo";
+import { signOut } from "../../../redux/action-creators/AuthActionCreators";
+import Logo from "../../Icons/Logo";
 
 export default () => {
     const token = localStorage.getItem("token");
+    const authorName = localStorage.getItem("name");
+    const author_avatar = localStorage.getItem("author_avatar");
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const navigationMenu = [
@@ -18,7 +20,6 @@ export default () => {
     ];
 
     const handleClick = async () => {
-        console.log("");
         await dispatch(signOut());
         navigate("/");
     };
@@ -48,7 +49,7 @@ export default () => {
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             {navigationMenu.map((item, index) => {
                                 return (
-                                    <li key={index} className="nav-item">
+                                    <li key={index} className={`nav-item`}>
                                         <NavLink
                                             className={({ isActive }) => {
                                                 const linkClasses = `nav-link`;
@@ -71,7 +72,10 @@ export default () => {
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             {registrationMenu.map((item, index) => {
                                 return (
-                                    <li key={index} className="nav-item">
+                                    <li
+                                        key={index}
+                                        className={`nav-item d-${item.display}`}
+                                    >
                                         <NavLink
                                             className={({ isActive }) => {
                                                 const linkClasses = `nav-link`;
@@ -91,46 +95,20 @@ export default () => {
                         </ul>
                     </div>
                     {token && (
-                        <div className="navbar-text dropdown">
-                            <a
-                                href="#"
-                                className="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
-                                id="dropdownUser2"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
+                        <div className="navbar-text">
+                            <NavLink
+                                to="/dashboard"
+                                className="d-flex align-items-center link-dark text-decoration-none"
                             >
                                 <img
-                                    src="images/img.png"
+                                    src={`${author_avatar}`}
                                     alt=""
                                     width="32"
                                     height="32"
                                     className="rounded-circle me-2"
                                 />
-                                <strong>Username</strong>
-                            </a>
-                            <ul
-                                className="dropdown-menu text-small shadow"
-                                aria-labelledby="dropdownUser2"
-                            >
-                                <li>
-                                    <a
-                                        className="dropdown-item"
-                                        href="change-password.html"
-                                    >
-                                        Change Password
-                                    </a>
-                                </li>
-                                <li></li>
-                            </ul>
-                            <div
-                                role="button"
-                                onClick={handleClick}
-                                className={`dropdown-item d-${
-                                    token ? "block" : "none"
-                                }`}
-                            >
-                                Sign out
-                            </div>
+                                <strong>{authorName}</strong>
+                            </NavLink>
                         </div>
                     )}
                 </div>

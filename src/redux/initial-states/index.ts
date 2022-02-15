@@ -3,12 +3,14 @@ export const authorInitialState = {
         _id: "",
         username: "",
         password: "",
-        profileId: "",
+        authorId: "",
         name: "",
         author_avatar: null,
         total_posts: 0,
+        total_likes: 0,
         popular_post_id: "",
         popular_post_name: "",
+        popular_post_likes: 0,
         timestamp: "",
     }
 }

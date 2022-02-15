@@ -15,7 +15,6 @@ const Signin = () => {
         (state: State) => state.generalReducer.isLoading
     );
 
-    const message = useSelector((state: State) => state.generalReducer.message);
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
@@ -38,7 +37,7 @@ const Signin = () => {
 
     return (
         <>
-            <section className="">
+            <section className="mt-5">
                 <div className="container">
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-lg-6 col-xl-5">

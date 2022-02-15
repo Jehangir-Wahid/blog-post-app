@@ -4,21 +4,20 @@ import { getAuthor } from "../../redux/action-creators/AuthorActionCreators";
 import { setIsLoading } from "../../redux/action-creators/GeneralActionCreators";
 import { State } from "../../redux/reducers";
 import { AuthorType } from "../../redux/types";
-import Author from "../../components/Author";
-import { useParams } from "react-router-dom";
+import Author from "../../components/AuthorComponents/Author";
+import { NavLink, useParams } from "react-router-dom";
+import AuthorPosts from "../AuthorPosts";
 
 const AuthorDetails = () => {
     const { authorId } = useParams();
-    const author: AuthorType = useSelector(
-        (state: State) => state.authorReducer
+    const author: AuthorType["data"] = useSelector(
+        (state: State) => state.authorReducer.data
     );
-    const message = useSelector((state: State) => state.generalReducer.message);
     const dispatch = useDispatch();
 
-    console.log(author);
     useEffect(() => {
         (async () => {
-            if (!author.data.name) {
+            if (!author.name) {
                 dispatch(setIsLoading(true));
             }
 
@@ -28,13 +27,41 @@ const AuthorDetails = () => {
 
     return (
         <div>
-            {message && (
-                <div>
-                    <div style={{ color: "white" }}>{message.text}</div>
-                    <div style={{ color: "white" }}>{message.level}</div>
-                </div>
+            {author.name && (
+                <>
+                    <h1 className="mt-4 mb-4">Author Details</h1>
+
+                    <div className="row">
+                        <div className="col-md-3">
+                            <div className="card">
+                                <div className="card-body">
+                                    <img
+                                        src={`${author.author_avatar}`}
+                                        className="img-thumbnail"
+                                        alt=""
+                                    />
+                                </div>
+                                <div className="border p-2">{author.name}</div>
+                                <div className="border p-2">
+                                    Total Posts: {author.total_posts}
+                                </div>
+                                <div className="border p-2">
+                                    Popular Post:
+                                    <NavLink
+                                        className="text-decoration-none"
+                                        to={`/post-details/${author.popular_post_id}`}
+                                    >
+                                        &nbsp;{author.popular_post_name}
+                                    </NavLink>
+                                </div>
+                            </div>
+                        </div>
+
+                        <AuthorPosts />
+                        <div className="col-md-3"></div>
+                    </div>
+                </>
             )}
-            {author.data.name && <Author data={author.data} />}
         </div>
     );
 };

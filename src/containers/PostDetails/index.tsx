@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import Post from "../../components/Post";
+import Post from "../../components/PostComponents/Post";
 import { setIsLoading } from "../../redux/action-creators/GeneralActionCreators";
 import { getPost } from "../../redux/action-creators/PostActionCreators";
 import { State } from "../../redux/reducers";

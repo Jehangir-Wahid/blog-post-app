@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Author from "../../components/Author";
+import Author from "../../components/AuthorComponents/Author";
 import { getAllAuthors } from "../../redux/action-creators/AuthorActionCreators";
 import { setIsLoading } from "../../redux/action-creators/GeneralActionCreators";
 import { State } from "../../redux/reducers";

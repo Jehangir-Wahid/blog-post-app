@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { likePost } from "../../redux/action-creators/PostActionCreators";
-import { PostType } from "../../redux/types";
+import { likePost } from "../../../redux/action-creators/PostActionCreators";
+import { PostType } from "../../../redux/types";
 
 const Post: React.FC<PostType> = ({
     data: {
@@ -43,7 +43,7 @@ const Post: React.FC<PostType> = ({
                             <div className="align-self-center">
                                 <NavLink
                                     className="text-decoration-none"
-                                    to={`/author-details/${authorId}`}
+                                    to={`/author-posts/${authorId}`}
                                 >
                                     &nbsp;{author_name}
                                 </NavLink>

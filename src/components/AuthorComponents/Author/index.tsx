@@ -1,9 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { AuthorType } from "../../redux/types";
+import { AuthorType } from "../../../redux/types";
 
 const Author: React.FC<AuthorType> = ({
     data: {
+        authorId,
         username,
         name,
         author_avatar,
@@ -23,7 +24,14 @@ const Author: React.FC<AuthorType> = ({
                     />
                 </div>
                 <div className="col-md-9">
-                    <h5 className="text-primary">{name}</h5>
+                    <h5 className="text-primary">
+                        <NavLink
+                            className="text-decoration-none"
+                            to={`/author-posts/${authorId}`}
+                        >
+                            &nbsp;{name}
+                        </NavLink>
+                    </h5>
                     <h5>Total Posts: {total_posts}</h5>
                     <h5>
                         Popular Post:
