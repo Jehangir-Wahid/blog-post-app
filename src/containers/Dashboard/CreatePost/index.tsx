@@ -5,7 +5,7 @@ import PostForm from "../../../components/PostComponents/PostForm";
 const CreatePost = () => {
     return (
         <>
-            <h1 className="mt-4 mb-4">Dashboard</h1>
+            <h1 className="mt-4 mb-4">Created Posts</h1>
 
             <div className="row">
                 {/* <!-- left menu area --> */}

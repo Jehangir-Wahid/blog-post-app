@@ -53,12 +53,28 @@ const Post: React.FC<PostType> = ({
                     <p>{title}</p>
                     <div className="d-flex justify-content-center">
                         <img
-                            src={post_image}
+                            src={`${post_image}`}
                             className="img-thumbnail"
                             alt=""
                         />
                     </div>
-                    <p className="mt-4 mb-4">{content}</p>
+                    <p
+                        className={`mt-4 mb-4 ${
+                            !window.location.pathname.includes("post-details")
+                                ? "col-4 text-truncate"
+                                : ""
+                        }`}
+                    >
+                        {content}
+                        <NavLink
+                            className="text-decoration-none"
+                            to={`/post-details/${_id}`}
+                        >
+                            {!window.location.pathname.includes(
+                                "post-details"
+                            ) && <p>Read more</p>}
+                        </NavLink>
+                    </p>
                 </div>
                 <div className="card-footer">
                     <div className="d-flex justify-content-between">

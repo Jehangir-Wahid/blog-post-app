@@ -11,9 +11,16 @@ const Message: React.FC<MessageType> = ({ text, level }) => {
     }, []);
 
     return (
-        <div className={`alert alert-${level}`} role="alert">
-            {text}
-        </div>
+        <>
+            {text && (
+                <>
+                    {window.scrollTo(0, 0)}
+                    <div className={`alert alert-${level}`} role="alert">
+                        {text}
+                    </div>
+                </>
+            )}
+        </>
     );
 };
 

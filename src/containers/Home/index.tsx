@@ -10,7 +10,6 @@ const Home = () => {
     const posts: PostsType = useSelector((state: State) => state.postsReducer);
     const dispatch = useDispatch();
 
-    console.log(posts);
     useEffect(() => {
         (async () => {
             if (posts.data.length <= 1) dispatch(setIsLoading(true));

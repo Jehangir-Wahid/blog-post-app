@@ -15,10 +15,7 @@ export const getAuthor = (authorId: any) => {
             });
         })
         .catch(async error => {
-            await dispatch({
-                type: GeneralActionTypes.SET_MESSAGE,
-                payload: { text: error.response.data.message, level: "warning" },
-            });
+            console.log(error.response.data.message)
         })
         .finally(async () => {
             await dispatch({

@@ -8,18 +8,30 @@ import {
     signOut,
     updatePassword,
 } from "../../../redux/action-creators/AuthActionCreators";
-import { setIsLoading } from "../../../redux/action-creators/GeneralActionCreators";
+import {
+    setIsLoading,
+    setMessage,
+} from "../../../redux/action-creators/GeneralActionCreators";
 import { authorInitialState } from "../../../redux/initial-states";
 import { State } from "../../../redux/reducers";
+import { MessageType } from "../../../redux/types";
 
 const UpdatePassword = () => {
-    const [password, setPassword] = useState(authorInitialState.data.password);
+    const [currentPassword, setCurrentPassword] = useState(
+        authorInitialState.data.password
+    );
+    const [newPassword, setNewPassword] = useState(
+        authorInitialState.data.password
+    );
     const [confirm_password, setConfirmPassword] = useState(
         authorInitialState.data.password
     );
 
     const isLoading = useSelector(
         (state: State) => state.generalReducer.isLoading
+    );
+    const message: MessageType = useSelector(
+        (state: State) => state.generalReducer.message
     );
 
     const navigate = useNavigate();
@@ -30,18 +42,23 @@ const UpdatePassword = () => {
         event: React.SyntheticEvent<HTMLFormElement>
     ) => {
         event.preventDefault();
-        if (confirm_password != password) {
-            await dispatch(setIsLoading(true));
-            await dispatch(updatePassword(password));
+        if (confirm_password != newPassword) {
+            dispatch(
+                setMessage({
+                    text: "Confirm password missmatch",
+                    level: "danger",
+                })
+            );
+        } else {
+            await dispatch(updatePassword({ currentPassword, newPassword }));
 
             await dispatch(signOut());
-            navigate("/signin");
         }
     };
 
     return (
         <>
-            <h1 className="mt-4 mb-4">Dashboard</h1>
+            <h1 className="mt-4 mb-4">Change Password</h1>
 
             <div className="row">
                 {/* <!-- left menu area --> */}
@@ -69,16 +86,39 @@ const UpdatePassword = () => {
                                                     className="form-label"
                                                     htmlFor="password"
                                                 >
-                                                    Password
+                                                    Current Password
                                                 </label>
                                                 <input
                                                     type="password"
-                                                    id="password"
+                                                    id="currentPassword"
                                                     className="form-control"
                                                     placeholder="Password"
                                                     required={true}
                                                     onChange={(event) => {
-                                                        setPassword(
+                                                        setCurrentPassword(
+                                                            event.target.value
+                                                        );
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="d-flex flex-row align-items-center mb-4">
+                                            <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                            <div className="form-outline flex-fill mb-0">
+                                                <label
+                                                    className="form-label"
+                                                    htmlFor="password"
+                                                >
+                                                    New Password
+                                                </label>
+                                                <input
+                                                    type="password"
+                                                    id="newPassword"
+                                                    className="form-control"
+                                                    placeholder="Password"
+                                                    required={true}
+                                                    onChange={(event) => {
+                                                        setNewPassword(
                                                             event.target.value
                                                         );
                                                     }}

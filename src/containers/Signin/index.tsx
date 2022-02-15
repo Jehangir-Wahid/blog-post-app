@@ -32,7 +32,9 @@ const Signin = () => {
                 },
             })
         );
-        navigate("/dashboard");
+        setTimeout(() => {
+            navigate("/dashboard");
+        }, 300);
     };
 
     return (

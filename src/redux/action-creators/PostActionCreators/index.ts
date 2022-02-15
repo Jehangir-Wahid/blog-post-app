@@ -4,18 +4,16 @@ import { Action } from "../../actions";
 import { LikePostType, PostType } from "../../types";
 import PostService from "../../../services/PostService";
 
-export const createPost = (post: PostType) => {
+export const createPost = (post: FormData) => {
     return (dispatch: Dispatch<Action>) => {
-        PostService.post("create-post", post.data)
+        PostService.post("create-post", post)
         .then(async response => {
-            console.log(response.data)
             await dispatch({
                 type: GeneralActionTypes.SET_MESSAGE,
                 payload: { text: response.data.message, level: "success" },
             });
         })
         .catch(async error => {
-            console.log(error.response)
             await dispatch({
                 type: GeneralActionTypes.SET_MESSAGE,
                 payload: { text: error.response.data.message, level: "danger" },

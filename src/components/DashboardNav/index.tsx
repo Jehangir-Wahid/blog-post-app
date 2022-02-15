@@ -6,7 +6,7 @@ import { signOut } from "../../redux/action-creators/AuthActionCreators";
 const DashboardNav = () => {
     const authorId = localStorage.getItem("authorId");
     const leftNavigationMenu = [
-        { text: "Dashboard", url: "dashboard", class: "active" },
+        { text: "Dashboard", url: "dashboard", class: "" },
         {
             text: "Created Posts",
             url: `dashboard/created-posts/${authorId}`,

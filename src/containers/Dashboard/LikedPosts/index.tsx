@@ -23,10 +23,9 @@ const LikedPosts = () => {
 
     return (
         <>
-            <h1 className="mt-4 mb-4">Dashboard</h1>
+            <h1 className="mt-4 mb-4">Liked Posts</h1>
 
             <div className="row">
-                {/* <!-- left menu area --> */}
                 <DashboardNav />
                 <Posts data={posts.data} />
                 <div className="col-md-3"></div>

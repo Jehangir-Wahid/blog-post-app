@@ -6,11 +6,13 @@ import Post from "../Post";
 const Posts: React.FC<PostsType> = ({ data }) => {
     return (
         <>
-            <div className="col-md-6">
-                {data.map((post, index) => (
-                    <Post key={index} data={post} />
-                ))}
-            </div>
+            {data.length > 0 && (
+                <div className="col-md-6">
+                    {data.map((post, index) => (
+                        <Post key={index} data={post} />
+                    ))}
+                </div>
+            )}
         </>
     );
 };

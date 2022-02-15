@@ -5,7 +5,7 @@ export const authorInitialState = {
         password: "",
         authorId: "",
         name: "",
-        author_avatar: null,
+        author_avatar: File,
         total_posts: 0,
         total_likes: 0,
         popular_post_id: "",
@@ -26,7 +26,7 @@ export const postInitialState = {
         likes: 0,
         title: "",
         content: "",
-        post_image: null,
+        post_image: File,
         tag: "",
         timestamp: "",
     }

@@ -12,7 +12,6 @@ const Authors = () => {
     );
     const dispatch = useDispatch();
 
-    console.log(authors);
     useEffect(() => {
         if (!authors) {
             dispatch(setIsLoading(true));

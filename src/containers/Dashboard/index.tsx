@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import DashboardNav from "../../components/DashboardNav";
 import { getAuthor } from "../../redux/action-creators/AuthorActionCreators";
 import { setIsLoading } from "../../redux/action-creators/GeneralActionCreators";
@@ -12,8 +12,12 @@ const Dashboard = () => {
         (state: State) => state.authorReducer.data
     );
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
+        if (localStorage.getItem("token") === null) {
+            navigate("/signin");
+        }
         (async () => {
             await dispatch(setIsLoading(true));
             await dispatch(getAuthor(authorId));

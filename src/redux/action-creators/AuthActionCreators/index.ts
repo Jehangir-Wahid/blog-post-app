@@ -4,13 +4,18 @@ import { Action } from "../../actions";
 import { AuthorType } from "../../types";
 import AuthService from "../../../services/AuthService"
 
-export const signUp = (author: AuthorType) => {
+export const signUp = (author: FormData) => {
     return (dispatch: Dispatch<Action>) => {
-        AuthService.post("signup", author.data)
+        AuthService.post("signup", author, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            }
+        })
         .then(async response => {
-            console.log(response.data)
             localStorage.setItem("token", response.data.token)
-            localStorage.setItem("author", response.data.author)
+            localStorage.setItem("authorId", response.data.authorId)
+            localStorage.setItem("author_avatar", response.data.author_avatar)
+            localStorage.setItem("name", response.data.name)
             await dispatch({
                 type: GeneralActionTypes.SET_MESSAGE,
                 payload: { text: response.data.message, level: "success" },
@@ -85,9 +90,9 @@ export const signOut = () => {
     };
 };
 
-export const updatePassword = (password: string) => {
+export const updatePassword = (data: object) => {
     return (dispatch: Dispatch<Action>) => {
-        AuthService.post("update-author", password)
+        AuthService.post("update-author", data)
         .then(async response => {
             await dispatch({
                 type: GeneralActionTypes.SET_MESSAGE,

@@ -15,7 +15,6 @@ const PostDetails = () => {
     const message = useSelector((state: State) => state.generalReducer.message);
     const dispatch = useDispatch();
 
-    console.log("Post: ", post);
     useEffect(() => {
         if (!post.title) {
             dispatch(setIsLoading(true));

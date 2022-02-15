@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { setIsLoading } from "../../../redux/action-creators/GeneralActionCreators";
 import { createPost } from "../../../redux/action-creators/PostActionCreators";
 import { postInitialState } from "../../../redux/initial-states";
@@ -9,9 +10,7 @@ import Logo from "../../Icons/Logo";
 const PostForm = () => {
     const [title, setTitle] = useState(postInitialState.data.title);
     const [content, setContent] = useState(postInitialState.data.content);
-    const [post_image, setPostImage] = useState<FileList | File | null>(
-        postInitialState.data.post_image
-    );
+    const [post_image, setPostImage] = useState<File | undefined>();
     const [tag, setTag] = useState(postInitialState.data.tag);
 
     const isLoading = useSelector(
@@ -20,23 +19,38 @@ const PostForm = () => {
     const message = useSelector((state: State) => state.generalReducer.message);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const fileList = event.target.files;
+        if (!fileList) {
+            return;
+        }
+        setPostImage(fileList[0]);
+    };
 
     const handleSubmit = async (
         event: React.SyntheticEvent<HTMLFormElement>
     ) => {
         event.preventDefault();
-
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("content", content);
+        formData.append("tag", tag);
+        if (!!post_image) {
+            formData.append("post_image", post_image, post_image.name);
+        }
         await dispatch(setIsLoading(true));
-        await dispatch(
-            createPost({
-                data: {
-                    title,
-                    content,
-                    post_image: "dfa871d6-6087-4513-97ad-5d4188445821.jpeg",
-                    tag,
-                },
-            })
-        );
+        await dispatch(createPost(formData));
+        return () => {
+            if (!message && message.level !== "danger") {
+                navigate(
+                    `/dashboard/created-posts/${localStorage.getItem(
+                        "authorId"
+                    )}`
+                );
+            }
+        };
     };
 
     return (
@@ -116,15 +130,7 @@ const PostForm = () => {
                                                 id="avatar"
                                                 className="form-control"
                                                 required={true}
-                                                onChange={(event) => {
-                                                    setPostImage(
-                                                        event.target.files![0]
-                                                    );
-                                                    console.log(
-                                                        "Author Avatar: ",
-                                                        post_image
-                                                    );
-                                                }}
+                                                onChange={handleFileChange}
                                             />
                                         </div>
                                     </div>

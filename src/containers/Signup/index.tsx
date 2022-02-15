@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../components/Icons/Logo";
 import { signUp } from "../../redux/action-creators/AuthActionCreators";
 import {
@@ -9,6 +9,7 @@ import {
 } from "../../redux/action-creators/GeneralActionCreators";
 import { authorInitialState } from "../../redux/initial-states";
 import { State } from "../../redux/reducers";
+import { MessageType } from "../../redux/types";
 
 interface FileReaderEventTarget extends EventTarget {
     result: string;
@@ -22,9 +23,7 @@ interface FileReaderEvent extends Event {
 const Signup = () => {
     const [username, setUsername] = useState(authorInitialState.data.username);
     const [name, setName] = useState(authorInitialState.data.name);
-    const [author_avatar, setAuthorAvatar] = useState<File | null>(
-        authorInitialState.data.author_avatar
-    );
+    const [author_avatar, setAuthorAvatar] = useState<File | undefined>();
     const [password, setPassword] = useState(authorInitialState.data.password);
     const [confirm_password, setConfirmPassword] = useState(
         authorInitialState.data.password
@@ -33,24 +32,31 @@ const Signup = () => {
         (state: State) => state.generalReducer.isLoading
     );
 
+    const message: MessageType = useSelector(
+        (state: State) => state.generalReducer.message
+    );
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setAuthorAvatar(event.target.files![0]);
-        console.log("Author Avatar: ", author_avatar);
-
-        let reader = new FileReader();
-        reader.readAsDataURL(event.target.files![0]);
-
-        // reader.onload((ev: ProgressEvent) => {
-        //     console.log("img data: ", reader.result);
-        // });
+        const fileList = event.target.files;
+        if (!fileList) {
+            return;
+        }
+        setAuthorAvatar(fileList[0]);
     };
 
     const handleSubmit = async (
         event: React.SyntheticEvent<HTMLFormElement>
     ) => {
         event.preventDefault();
+        const formData = new FormData();
+        formData.append("username", username);
+        formData.append("name", name);
+        formData.append("password", password);
+        if (!!author_avatar) {
+            formData.append("author_avatar", author_avatar, author_avatar.name);
+        }
         if (confirm_password != password) {
             dispatch(
                 setMessage({ text: "Repeat password mismatch", level: "error" })
@@ -58,16 +64,11 @@ const Signup = () => {
             return false;
         }
         await dispatch(setIsLoading(true));
-        await dispatch(
-            signUp({
-                data: {
-                    username,
-                    name,
-                    author_avatar,
-                    password,
-                },
-            })
-        );
+        await dispatch(signUp(formData));
+
+        setTimeout(() => {
+            navigate("/dashboard");
+        }, 300);
     };
 
     return (

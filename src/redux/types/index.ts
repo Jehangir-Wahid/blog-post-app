@@ -5,7 +5,7 @@ export interface AuthorType {
         password?: string,
         authorId?: string,
         name?: string,
-        author_avatar?: string | File | FileList | null,
+        author_avatar?: File,
         total_posts?: number,
         total_likes?: number,
         popular_post_id?: string,
@@ -21,7 +21,7 @@ interface Author {
     password?: string,
     authorId?: string,
     name?: string,
-    author_avatar?: string,
+    author_avatar?: File,
     total_posts?: number,
     total_likes?: number,
     popular_post_id?: string,
@@ -42,7 +42,7 @@ export interface PostType {
         author_avatar?: string,
         title: string,
         content: string,
-        post_image?: string,
+        post_image?: File,
         tag: string,
         likes?: number
         timestamp?: string
@@ -56,7 +56,7 @@ interface Post {
     author_avatar?: string,
     title: string,
     content: string,
-    post_image?: string,
+    post_image?: File,
     tag: string,
     likes?: number
     timestamp?: string
